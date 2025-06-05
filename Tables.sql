@@ -1,0 +1,10 @@
+CREATE DATABASE Bookflow DEFAULT CHARACTER SET = 'utf8mb4';
+CREATE TABLE Books(
+
+);
+
+CREATE TABLE Authors(
+
+);
+
+CREATE TABLE 
