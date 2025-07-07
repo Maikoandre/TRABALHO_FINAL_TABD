@@ -40,3 +40,37 @@ BEGIN
 END;
 //
 DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE criar_pedido (
+    IN p_cliente_id INT,
+    OUT p_pedido_id INT
+)
+BEGIN
+    INSERT INTO Pedidos (cliente_id, data_pedido, status)
+    VALUES (p_cliente_id, CURDATE(), 'Aberto');
+    SET p_pedido_id = LAST_INSERT_ID();
+END;
+//
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE adicionar_item_pedido (
+    IN p_pedido_id INT,
+    IN p_livro_id INT,
+    IN p_quantidade INT
+)
+BEGIN
+    DECLARE v_preco DECIMAL(10,2);
+
+    SELECT preco INTO v_preco FROM Livros WHERE id = p_livro_id;
+
+    INSERT INTO Itens_Pedido (pedido_id, livro_id, quantidade, preco_unitario)
+    VALUES (p_pedido_id, p_livro_id, p_quantidade, v_preco);
+
+    UPDATE Livros
+    SET quantidade_estoque = quantidade_estoque - p_quantidade
+    WHERE id = p_livro_id;
+END;
+//
+DELIMITER ;
