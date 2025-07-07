@@ -52,16 +52,3 @@ BEGIN
 END;
 //
 DELIMITER ;
-
-DELIMITER //
-CREATE PROCEDURE atualizar_status_pedido (
-    IN p_pedido_id INT,
-    IN p_novo_status ENUM('Aberto', 'Enviado', 'Entregue', 'Cancelado')
-)
-BEGIN
-    UPDATE Pedidos
-    SET status = p_novo_status
-    WHERE id = p_pedido_id;
-END;
-//
-DELIMITER ;
