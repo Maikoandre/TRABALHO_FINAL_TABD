@@ -15,3 +15,16 @@ SELECT DISTINCT c.id AS ID_Cliente, c.nome AS Nome_Cliente, c.email AS Email
 FROM Clientes AS c
 JOIN Pedidos AS p ON c.id=p.cliente_id
 WHERE p.data_pedido >= DATE('now', '-6 months');
+
+CREATE VIEW vw_relatorio_vendas AS
+SELECT
+    c.nome AS categoria,
+    l.autor,
+    SUM(ip.quantidade) AS total_vendido,
+    MIN(p.data_pedido) AS data_inicio,
+    MAX(p.data_pedido) AS data_fim
+FROM Itens_Pedido ip
+         JOIN Livros l ON ip.livro_id = l.id
+         JOIN Categorias c ON l.categoria_id = c.id
+         JOIN Pedidos p ON ip.pedido_id = p.id
+GROUP BY c.nome, l.autor;
