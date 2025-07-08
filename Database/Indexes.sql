@@ -8,10 +8,10 @@ CREATE INDEX idx_pedidos_data_pedido
 ON Pedidos(data_pedido);
 
 CREATE INDEX idx_itens_pedido_pedido_id
-ON Itens_Pedidos (pedido_id);
+ON Itens_Pedido (pedido_id);
 
 CREATE INDEX idx_itens_pedido_livro_id
-ON Itens_Pedidos (livro_id);
+ON Itens_Pedido (livro_id);
 
 CREATE INDEX idx_itens_pedido_quantidade
 ON Itens_Pedido (quantidade);
